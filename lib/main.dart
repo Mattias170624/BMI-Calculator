@@ -2,8 +2,8 @@
 
 import 'dart:ffi';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'resultPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,27 +22,31 @@ class MyApp extends StatelessWidget {
 class StartScreen extends StatelessWidget {
   final _weightController = TextEditingController();
   final _heightController = TextEditingController();
+  late double bmiNum;
 
-  void handleUserInputs() {
+  bool handleUserInputs() {
     String weight = _weightController.text.trim();
     String height = _heightController.text.trim();
 
     if (weight.isEmpty || height.isEmpty) {
-      return;
+      return false;
     }
 
     if (!weight.contains(RegExp(r'[0-9]')) ||
         !height.contains(RegExp(r'[0-9]'))) {
-      return;
+      return false;
     }
 
-    final int weight1 = int.parse(_weightController.text);
-    final int height2 = int.parse(_heightController.text);
+    final int weightNum = int.parse(_weightController.text);
+    final int heightNum = int.parse(_heightController.text);
 
-    final double bmi = weight1 / pow(height2 / 100, 2);
+    final double bmi = weightNum / pow(heightNum / 100, 2);
+    bmiNum = bmi;
 
-    print(bmi);
+    return true;
   }
+
+  void changeScreen() {}
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +99,17 @@ class StartScreen extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: handleUserInputs,
+              onPressed: (() {
+                if (handleUserInputs() == true) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ResultPage(bmiNum),
+                      ));
+                } else {
+                  print('FALSE');
+                }
+              }),
               style: ElevatedButton.styleFrom(
                 primary: Colors.greenAccent,
                 onPrimary: Colors.black87,
