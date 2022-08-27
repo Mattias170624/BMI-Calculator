@@ -2,7 +2,9 @@
 
 import 'dart:ffi';
 import 'dart:math';
+import 'package:bmi_app/genderList.dart';
 import 'package:flutter/material.dart';
+import 'genderList.dart';
 import 'resultPage.dart';
 
 void main() {
@@ -94,6 +96,10 @@ class StartScreen extends StatelessWidget {
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(labelText: 'Height in Cm:'),
                     ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: GenderList(),
+                    ),
                   ],
                 ),
               ),
@@ -131,5 +137,3 @@ class StartScreen extends StatelessWidget {
     );
   }
 }
-
-//Icon(Icons.arrow_forward_ios_rounded)
