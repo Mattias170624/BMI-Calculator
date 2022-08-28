@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 class ResultPage extends StatelessWidget {
@@ -37,31 +39,76 @@ class ResultPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                color: Colors.red,
-                padding: EdgeInsets.all(20),
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(left: 20),
                 child: Text(
-                  bmiTextResult(),
+                  'Your Result',
+                  style: TextStyle(
+                    fontSize: 34,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
               ),
               Container(
-                color: Colors.blue,
-                padding: EdgeInsets.all(20),
-                child: Text(
-                  bmiNumberResult(),
+                width: double.infinity,
+                margin:
+                    EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 30),
+                padding: EdgeInsets.all(40),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.black54,
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      bmiTextResult(),
+                      style: TextStyle(
+                        color: Colors.greenAccent,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(40),
+                      child: Text(
+                        bmiNumberResult(),
+                        style: TextStyle(
+                          fontSize: 42,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Text('Text'),
+                  ],
                 ),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.greenAccent,
-                  onPrimary: Colors.black87,
-                  padding: EdgeInsets.all(20),
-                ),
-                child: const Text(
-                  'Calculate Again',
-                  style: TextStyle(fontSize: 24),
+              Container(
+                width: double.infinity,
+                margin: EdgeInsets.only(left: 20, right: 20),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.all(20),
+                    primary: Theme.of(context).colorScheme.primary,
+                    onPrimary: Colors.black87,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Text(
+                        'Recalculate',
+                        style: TextStyle(
+                          fontSize: 24,
+                        ),
+                      ),
+                      Icon(
+                        Icons.replay,
+                        size: 30,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

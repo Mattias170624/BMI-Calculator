@@ -17,6 +17,21 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'BMI-App',
       home: StartScreen(),
+      theme: ThemeData(
+        colorScheme: ColorScheme(
+          brightness: Brightness.dark,
+          primary: Colors.orangeAccent,
+          onPrimary: Colors.red,
+          secondary: Colors.green,
+          onSecondary: Colors.yellow,
+          error: Colors.red,
+          onError: Colors.red,
+          background: Colors.red,
+          onBackground: Colors.red,
+          surface: Colors.black,
+          onSurface: Colors.black,
+        ),
+      ),
     );
   }
 }
@@ -48,8 +63,6 @@ class StartScreen extends StatelessWidget {
     return true;
   }
 
-  void changeScreen() {}
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,12 +72,15 @@ class StartScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
+              alignment: Alignment.topLeft,
+              padding: EdgeInsets.only(left: 20),
               child: Text(
                 'BMI Calculator',
                 style: TextStyle(
-                    color: Colors.greenAccent,
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold),
+                  color: Theme.of(context).colorScheme.primary,
+                  fontSize: 34,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             Container(
@@ -74,14 +90,6 @@ class StartScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(5),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.25),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0, 3),
-                  ),
-                ],
               ),
               child: Center(
                 child: Column(
@@ -89,12 +97,24 @@ class StartScreen extends StatelessWidget {
                     TextField(
                       controller: _weightController,
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: 'Weight in Kg:'),
+                      style: TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                        labelText: 'Weight in Kg:',
+                        labelStyle: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
                     ),
                     TextField(
                       controller: _heightController,
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: 'Height in Cm:'),
+                      style: TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                        labelText: 'Height in Cm:',
+                        labelStyle: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
                     ),
                     Align(
                       alignment: Alignment.centerLeft,
@@ -104,31 +124,42 @@ class StartScreen extends StatelessWidget {
                 ),
               ),
             ),
-            ElevatedButton(
-              onPressed: (() {
-                if (handleUserInputs() == true) {
-                  Navigator.push(
+            Container(
+              width: double.infinity,
+              margin: EdgeInsets.only(left: 20, right: 20),
+              child: ElevatedButton(
+                onPressed: (() {
+                  if (handleUserInputs() == true) {
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => ResultPage(bmiNum),
-                      ));
-                } else {
-                  print('FALSE');
-                }
-              }),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.greenAccent,
-                onPrimary: Colors.black87,
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Text(
-                    'Calculate',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  Icon(Icons.arrow_forward_ios_rounded),
-                ],
+                      ),
+                    );
+                  } else {
+                    print('FALSE');
+                  }
+                }),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.all(20),
+                  primary: Theme.of(context).colorScheme.primary,
+                  onPrimary: Colors.black87,
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Text(
+                      'Calculate',
+                      style: TextStyle(
+                        fontSize: 24,
+                      ),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 30,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
