@@ -13,12 +13,21 @@ class _GenderListState extends State<GenderList> {
   @override
   Widget build(BuildContext context) {
     return DropdownButton(
+      underline: Container(
+        color: Colors.grey,
+        height: 1,
+      ),
       value: dropdownvalue,
+      focusColor: Colors.red,
+      style: TextStyle(
+        color: Theme.of(context).colorScheme.primary,
+      ),
       icon: const Icon(Icons.keyboard_arrow_down),
       items: [
         DropdownMenuItem(
           child: Text('Male'),
           value: 'Male',
+          enabled: true,
         ),
         DropdownMenuItem(
           child: Text('Female'),
