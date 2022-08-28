@@ -63,6 +63,11 @@ class StartScreen extends StatelessWidget {
     return true;
   }
 
+  void clearUserInputs() {
+    _weightController.clear();
+    _heightController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,6 +103,7 @@ class StartScreen extends StatelessWidget {
                       controller: _weightController,
                       keyboardType: TextInputType.number,
                       style: TextStyle(color: Colors.black),
+                      textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                         labelText: 'Weight in Kg:',
                         labelStyle: TextStyle(
@@ -109,6 +115,7 @@ class StartScreen extends StatelessWidget {
                       controller: _heightController,
                       keyboardType: TextInputType.number,
                       style: TextStyle(color: Colors.black),
+                      textInputAction: TextInputAction.done,
                       decoration: InputDecoration(
                         labelText: 'Height in Cm:',
                         labelStyle: TextStyle(
@@ -130,6 +137,7 @@ class StartScreen extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: (() {
                   if (handleUserInputs() == true) {
+                    clearUserInputs();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
