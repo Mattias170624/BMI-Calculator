@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:bmi_app/savedResultsList.dart';
 import 'package:flutter/material.dart';
+import 'savedResultsList.dart';
 
 class ResultPage extends StatelessWidget {
   final bmi;
@@ -38,17 +40,20 @@ class ResultPage extends StatelessWidget {
     return 'BMI: $parsedBmi';
   }
 
+  void addNewResult() {
+    SavedResultList(bmi);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
               alignment: Alignment.topLeft,
-              padding: EdgeInsets.only(left: 20),
+              padding: EdgeInsets.only(left: 20, top: 100),
               child: Text(
                 'Your Result',
                 style: TextStyle(
@@ -60,7 +65,7 @@ class ResultPage extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              margin: EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 30),
+              margin: EdgeInsets.only(left: 20, right: 20, top: 30),
               padding: EdgeInsets.all(40),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
@@ -76,7 +81,20 @@ class ResultPage extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.all(40),
+                    margin: EdgeInsets.only(top: 20),
+                    padding: EdgeInsets.only(bottom: 20),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          color: Colors.white,
+                          width: 1,
+                        ),
+                      ),
+                    ),
+                    child: Text(bmiTextSuggestion),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 40),
                     child: Text(
                       bmiNumberResult(),
                       textAlign: TextAlign.center,
@@ -86,13 +104,13 @@ class ResultPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Text(bmiTextSuggestion),
                 ],
               ),
             ),
+            SavedResultList(bmi),
+            Spacer(),
             Container(
-              width: double.infinity,
-              margin: EdgeInsets.only(left: 20, right: 20),
+              margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
